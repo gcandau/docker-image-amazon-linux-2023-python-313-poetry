@@ -13,13 +13,13 @@ RUN yum groupinstall "Development Tools" -y \
 
 
 # Install Python 3.13
-RUN wget https://www.python.org/ftp/python/3.13.3/Python-3.13.3.tgz \
-    && tar -xvf Python-3.13.3.tgz \
-    && cd Python-3.13.3 \
+RUN wget https://www.python.org/ftp/python/3.13.4/Python-3.13.4.tgz \
+    && tar -xvf Python-3.13.4.tgz \
+    && cd Python-3.13.4 \
     && ./configure --enable-optimizations --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib" \
     && make altinstall \
     && cd .. \
-    && rm -rf Python-3.13.3.tgz Python-3.13.3
+    && rm -rf Python-3.13.4.tgz Python-3.13.4
 
 # Install poetry separated from system interpreter
 RUN python3.13 -m venv $POETRY_VENV \
