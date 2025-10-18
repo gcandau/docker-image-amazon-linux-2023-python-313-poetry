@@ -9,17 +9,17 @@ ENV POETRY_CACHE_DIR=/opt/.cache
 # Install dependencies
 RUN yum groupinstall "Development Tools" -y \
     && yum erase openssl-devel -y \
-    && yum install openssl openssl-devel  libffi-devel bzip2-devel wget -y
+    && yum install openssl openssl-devel libffi-devel bzip2-devel wget -y
 
 
 # Install Python 3.13
-RUN wget https://www.python.org/ftp/python/3.13.7/Python-3.13.7.tgz \
-    && tar -xvf Python-3.13.7.tgz \
-    && cd Python-3.13.7 \
+RUN wget https://www.python.org/ftp/python/3.13.9/Python-3.13.9.tgz \
+    && tar -xvf Python-3.13.9.tgz \
+    && cd Python-3.13.9 \
     && ./configure --enable-optimizations --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib" \
     && make altinstall \
     && cd .. \
-    && rm -rf Python-3.13.7.tgz Python-3.13.7
+    && rm -rf Python-3.13.9.tgz Python-3.13.9
 
 # Install poetry separated from system interpreter
 RUN python3.13 -m venv $POETRY_VENV \
